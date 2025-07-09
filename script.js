@@ -13,3 +13,4 @@ document.getElementById("form").addEventListener("submit", function (e) {
     .then((data) => console.log(data))
     .catch((error) => console.error(`The error: ${error}`));
 });
+ 
