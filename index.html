@@ -7,15 +7,27 @@
     <title>Home || Movie Watchlist</title>
   </head>
   <body>
-    <form id="form">
-      <input
-        type="text"
-        id="movie-input"
-        placeholder="Enter your movie name"
-        name="movie"
-      />
-      <button type="submit" id="check-api">Check API</button>
-    </form>
+    <main>
+      <section class="hero-section">
+        <div class="hero-container">
+          <h1>Find your film</h1>
+          <a href="watchlist.html">My Watchlist</a>
+        </div>
+      </section>
+
+      <section class="main-content">
+        <form id="form" class="form">
+          <input
+            type="text" 
+            id="movie-input"
+            placeholder="Search for your favorite movie"
+            name="movieInput"
+            aria-label="A Search Bar for Movies"
+          />
+          <button type="submit" id="check-api">Check API</button>
+        </form>
+      </section>
+    </main>
     <script type="module" src="script.js"></script>
   </body>
 </html>

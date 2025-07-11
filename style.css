@@ -23,12 +23,10 @@
 }
 
 body {
-  /* 4. Add accessible line-height */
   line-height: 1.5;
   /* 5. Improve text rendering */
   -webkit-font-smoothing: antialiased;
   font-family: "Darker Grotesque", sans-serif;
-  min-height: 100vh;
 }
 
 /* 6. Improve media defaults */
@@ -79,4 +77,62 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+}
+
+/* MAIN STYLING */
+
+main {
+  min-height: 100vh;
+  color: #fff;
+  font-size: 1rem;
+  background-color: #121212;
+}
+
+.hero-section {
+  background: #0e0e0e url(assets//images/hero-background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5rem 2.5rem;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  > h1 {
+    font-size: 2.5rem;
+    font-weight: bolder;
+  }
+
+  > a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+.main-content {
+  padding-inline: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(assets/images/section-backgground.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+
+  > button {
+    background-color: #4b4b4b;
+    padding-inline: 0.5rem;
+    padding-block: 1rem;
+  }
 }
