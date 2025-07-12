@@ -82,10 +82,10 @@ h6 {
 /* MAIN STYLING */
 
 main {
-  min-height: 100vh;
   color: #fff;
   font-size: 1rem;
   background-color: #121212;
+  min-height: 100vh;
 }
 
 .hero-section {
@@ -119,11 +119,17 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
 }
 
 .form {
   display: flex;
   flex-direction: row;
+  position: absolute;
+  margin: 0 auto;
+  top: -1.5rem;
 
   > button {
     background-color: #4b4b4b;
