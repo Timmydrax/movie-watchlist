@@ -7,7 +7,7 @@ function renderMovie(e) {
   e.preventDefault();
   let titleInput = movieTitle.value.trim();
 
-  fetch(`https://www.omdbapi.com/?t=${titleInput}&apikey=${apiKey}`)
+  fetch(`https://www.omdbapi.com/?t=${titleInput}&plot=full&apikey=${apiKey}`)
     .then((res) => res.json())
     .then((data) => {
       if (data.Response === "False") {
@@ -18,16 +18,17 @@ function renderMovie(e) {
       <div class="movie-box"> 
       <img src="${data.Poster}" alt="A poster of ${data.Title}"/>
       <div class="movie-content">
-        <div>
+        <div class="movie-heading">
          <h1>${data.Title}</h1>
-         <span>${data.Ratings[0].Value || "No rating available"}</span>
-        </div>
-         <span>
+         <i class="fa-solid fa-star"></i>
+         <span>${data.Ratings?.[0]?.Value || "No rating available"}</span>
+        </div >
+         <span class="movie-genre">
           <p>${data.Runtime}</p>
           <p>${data.Genre}</p>
         <button><i class="fa-solid fa-plus"></i>Watchlist</button>
          </span>
-        <p>${data.Plot}</p>mo
+        <p>${data.Plot}</p>
       </div>
       </div>
       `;

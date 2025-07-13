@@ -182,15 +182,33 @@ main {
   display: flex;
   align-items: center;
   margin: 0 auto;
-  border-bottom: 2px solid #2c2c2c;
+  border-bottom: 1px solid #2c2c2c;
+  gap: 1.5em;
+  padding-block-end: 2rem;
 
   > img {
-    width: 100px;
-    height: 150px;
+    width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 }
 
 .movie-content {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+.movie-genre,
+.movie-heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fa-star {
+  font-size: 1rem;
+  color: #fec654;
 }
