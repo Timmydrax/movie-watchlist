@@ -28,7 +28,7 @@ function renderMovie(e) {
           <p>${data.Genre}</p>
         <button><i class="fa-solid fa-plus"></i>Watchlist</button>
          </span>
-        <p>${data.Plot}</p>
+        <p class="plot">${data.Plot}</p>
       </div>
       </div>
       `;

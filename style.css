@@ -185,6 +185,8 @@ main {
   border-bottom: 1px solid #2c2c2c;
   gap: 1.5em;
   padding-block-end: 2rem;
+  max-width: 840px;
+  width: 100%;
 
   > img {
     width: 200px;
@@ -211,4 +213,14 @@ main {
 .fa-star {
   font-size: 1rem;
   color: #fec654;
+}
+
+.plot {
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4; /* Show 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
 }
