@@ -116,6 +116,7 @@ main {
 
 .main-content {
   padding-inline: 2.5rem;
+  padding-block: 3.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,10 +131,66 @@ main {
   position: absolute;
   margin: 0 auto;
   top: -1.5rem;
+  max-width: 460px;
+  width: 100%;
+  height: 48px;
+  align-items: center;
+  background-color: #2e2e2f;
+  border-radius: 8px;
+  padding-inline-start: 1rem;
+}
 
-  > button {
-    background-color: #4b4b4b;
-    padding-inline: 0.5rem;
-    padding-block: 1rem;
+.fa-magnifying-glass {
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  color: #9ca3af;
+}
+
+.form button {
+  background-color: #4b4b4b;
+  color: #fff;
+  padding-block: 0.5rem;
+  padding-inline: 1.5rem;
+  border: none;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+}
+
+.form input {
+  width: 100%;
+  background-color: #2e2e2f;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.form input:focus {
+  background-color: #2e2e2f;
+  color: white;
+}
+
+.form input::placeholder {
+  color: #a5a5a5;
+  font-size: 1.25rem;
+}
+
+/* Main Section */
+
+.movie-box {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  border-bottom: 2px solid #2c2c2c;
+
+  > img {
+    width: 100px;
+    height: 150px;
   }
+}
+
+.movie-content {
+  display: flex;
+  flex-direction: column;
 }

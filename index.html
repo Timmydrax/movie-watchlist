@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/ea749a88b3.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="style.css" />
     <title>Home || Movie Watchlist</title>
   </head>
@@ -17,17 +21,21 @@
 
       <section class="main-content">
         <form id="form" class="form">
+          <i class="fa-solid fa-magnifying-glass"></i>
           <input
             type="text"
             id="movie-input"
             placeholder="Search for your favorite movie"
             name="movieInput"
             aria-label="A Search Bar for Movies"
+            autocomplete="off"
           />
-          <button type="submit" id="check-api">Check API</button>
+          <button type="submit" id="check-api">Search</button>
         </form>
 
-        <img src="assets/images/section-backgground.png" />
+        <div class="movie-container" id="movie-container">
+          <img src="assets/images/section-backgground.png" />
+        </div>
       </section>
     </main>
     <script type="module" src="script.js"></script>

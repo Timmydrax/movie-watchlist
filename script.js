@@ -1,16 +1,41 @@
 const apiKey = "4edfe651";
+const movieTitle = document.getElementById("movie-input");
+const form = document.getElementById("form");
+const movieContainer = document.getElementById("movie-container");
 
-document.getElementById("form").addEventListener("submit", function (e) {
+function renderMovie(e) {
   e.preventDefault();
+  let titleInput = movieTitle.value.trim();
 
-  console.log("Hello");
-
-  const movieTitleInput = document.getElementById("movie-input").value;
-  console.log(movieTitleInput);
-
-  fetch(`https://www.omdbapi.com/?t=${movieTitleInput}&apikey=${apiKey}`)
+  fetch(`https://www.omdbapi.com/?t=${titleInput}&apikey=${apiKey}`)
     .then((res) => res.json())
-    .then((data) => console.log(data))
+    .then((data) => {
+      if (data.Response === "False") {
+        movieContainer.innerHTML = `<p>${data.Error}</p>`;
+        return;
+      }
+      let renderHtml = `
+      <div class="movie-box"> 
+      <img src="${data.Poster}" alt="A poster of ${data.Title}"/>
+      <div class="movie-content">
+        <div>
+         <h1>${data.Title}</h1>
+         <span>${data.Ratings[0].Value || "No rating available"}</span>
+        </div>
+         <span>
+          <p>${data.Runtime}</p>
+          <p>${data.Genre}</p>
+        <button><i class="fa-solid fa-plus"></i>Watchlist</button>
+         </span>
+        <p>${data.Plot}</p>mo
+      </div>
+      </div>
+      `;
+
+      console.log(data);
+      movieContainer.innerHTML = renderHtml;
+    })
     .catch((error) => console.error(`The error: ${error}`));
-});
-     
+}
+
+form.addEventListener("submit", renderMovie);
