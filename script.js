@@ -83,73 +83,80 @@ function renderMovie(e) {
     .catch((error) => console.error(`The error: ${error}`));
 }
 
+if (form) {
+  form.addEventListener("submit", renderMovie);
+}
+
 // Watchlist Render
 if (watchlistContainer) {
   renderWatchlist();
 }
 
 function renderWatchlist() {
-  if (form) {
-    form.addEventListener("submit", renderMovie);
-  }
-
-  // Code for WatchList
   if (watchlistContainer) {
     console.log(watchList);
 
     if (watchList.length === 0) {
       watchlistContainer.innerHTML = `
-    <p>Your watchlist is looking a little empty...</p>
-          <a href="index.html"
-            ><i class="fa-solid fa-plus"></i>Let’s add some movies!</a
-          >
-    `;
+        <p>Your watchlist is looking a little empty...</p>
+        <a href="index.html">
+          <i class="fa-solid fa-plus"></i>Let’s add some movies!
+        </a>
+      `;
     } else {
       const watchContainer = watchList
         .map(
-          (movie) => `
-        <div class="movie-box"> 
-        <img src="${movie.Poster}" alt="A poster of ${movie.Title}"/>
-        <div class="movie-content">
-        <div class="movie-heading">
-        <h1>${movie.Title}</h1>
-        <i class="fa-solid fa-star"></i>
-        <span>${movie.Ratings?.[0]?.Value || "No rating available"}</span>
-        </div >
-        <span class="movie-genre">
-        <p>${movie.Runtime}</p>
-        <p>${movie.Genre}</p>
-        <button class="remove-btn"><i class="fa-solid fa-minus"></i>Remove</button>
-        </span>
-        <p class="plot">${movie.Plot}</p>
-        </div>
-        </div>
-        `
+          (movie, index) => `
+            <div class="movie-box"> 
+              <img src="${movie.Poster}" alt="A poster of ${movie.Title}"/>
+              <div class="movie-content">
+                <div class="movie-heading">
+                  <h1>${movie.Title}</h1>
+                  <i class="fa-solid fa-star"></i>
+                  <span>${
+                    movie.Ratings?.[0]?.Value || "No rating available"
+                  }</span>
+                </div>
+                <span class="movie-genre">
+                  <p>${movie.Runtime}</p>
+                  <p>${movie.Genre}</p>
+                  <button class="remove-btn" data-index="${index}">
+                    <i class="fa-solid fa-minus"></i>Remove
+                  </button>
+                </span>
+                <p class="plot">${movie.Plot}</p>
+              </div>
+            </div>
+          `
         )
         .join("");
 
       watchlistContainer.innerHTML = watchContainer;
+
+      // Add event listener to each remove button
+      const removeBtns = document.querySelectorAll(".remove-btn");
+
+      removeBtns.forEach((button) => {
+        button.addEventListener("click", () => {
+          const index = button.dataset.index;
+          watchList.splice(index, 1);
+          localStorage.setItem("watchlist", JSON.stringify(watchList));
+
+          // Show alert
+          Swal.fire({
+            toast: true,
+            position: "top-end",
+            icon: "warning",
+            title: "Removed from watchlist",
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          });
+
+          // Re-render the updated list
+          renderWatchlist();
+        });
+      });
     }
   }
-
-  const removeBtns = document.querySelectorAll(".remove-btn");
-
-  removeBtns.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      watchList.splice(index, 1);
-      localStorage.setItem("watchlist", JSON.stringify(watchList));
-
-      Swal.fire({
-        toast: true,
-        position: "top-end",
-        icon: "warning",
-        title: "Removed from watchlist",
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      });
-
-      renderWatchlist();
-    });
-  });
 }
