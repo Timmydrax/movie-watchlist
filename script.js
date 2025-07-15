@@ -83,25 +83,31 @@ function renderMovie(e) {
     .catch((error) => console.error(`The error: ${error}`));
 }
 
-if (form) {
-  form.addEventListener("submit", renderMovie);
+// Watchlist Render
+if (watchlistContainer) {
+  renderWatchlist();
 }
 
-// Code for WatchList
-if (watchlistContainer) {
-  console.log(watchList);
+function renderWatchlist() {
+  if (form) {
+    form.addEventListener("submit", renderMovie);
+  }
 
-  if (watchList.length === 0) {
-    watchlistContainer.innerHTML = `
+  // Code for WatchList
+  if (watchlistContainer) {
+    console.log(watchList);
+
+    if (watchList.length === 0) {
+      watchlistContainer.innerHTML = `
     <p>Your watchlist is looking a little empty...</p>
           <a href="index.html"
             ><i class="fa-solid fa-plus"></i>Let’s add some movies!</a
           >
     `;
-  } else {
-    const watchContainer = watchList
-      .map(
-        (movie) => `
+    } else {
+      const watchContainer = watchList
+        .map(
+          (movie) => `
         <div class="movie-box"> 
         <img src="${movie.Poster}" alt="A poster of ${movie.Title}"/>
         <div class="movie-content">
@@ -119,29 +125,31 @@ if (watchlistContainer) {
         </div>
         </div>
         `
-      )
-      .join("");
+        )
+        .join("");
 
-    watchlistContainer.innerHTML = watchContainer;
+      watchlistContainer.innerHTML = watchContainer;
+    }
   }
-}
 
-const removeBtns = document.querySelectorAll(".remove-btn");
+  const removeBtns = document.querySelectorAll(".remove-btn");
 
-removeBtns.forEach((button, index) => {
-  button.addEventListener("click", () => {
-    watchList.splice(index, 1);
-    localStorage.setItem("watchlist", JSON.stringify(watchList));
-    location.reload();
+  removeBtns.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      watchList.splice(index, 1);
+      localStorage.setItem("watchlist", JSON.stringify(watchList));
 
-    // Swal.fire({
-    //   toast: true,
-    //   position: "top-end",
-    //   icon: "warning",
-    //   title: "Removed from watchlist",
-    //   showConfirmButton: false,
-    //   timer: 1500,
-    //   timerProgressBar: true,
-    // });
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "warning",
+        title: "Removed from watchlist",
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+      });
+
+      renderWatchlist();
+    });
   });
-});
+}
