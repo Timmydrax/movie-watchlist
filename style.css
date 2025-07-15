@@ -202,6 +202,13 @@ main {
   gap: 1rem;
 }
 
+.movie-genre button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
 .movie-genre,
 .movie-heading {
   display: flex;
@@ -223,4 +230,39 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
+}
+
+.watchlist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  > p {
+    color: #787878;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  > a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 700;
+
+    > i {
+      color: #121212;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      border: 1px solid whitesmoke;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
