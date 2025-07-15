@@ -29,7 +29,7 @@ function renderMovie(e) {
          <span class="movie-genre">
           <p>${data.Runtime}</p>
           <p>${data.Genre}</p>
-        <button id="add-button"><i class="fa-solid fa-plus"></i>Watchlist</button>
+        <button class="add-button"><i class="fa-solid fa-plus"></i>Watchlist</button>
          </span>
         <p class="plot">${data.Plot}</p>
       </div>
@@ -40,22 +40,43 @@ function renderMovie(e) {
       movieContainer.innerHTML = renderHtml;
 
       // Add to watch list
-      const addToWatchlist = document.getElementById("add-button");
+      // const addToWatchlist = document.getElementById("add-button");
+      const addToWatchlist = document.querySelectorAll(".add-button");
 
       if (addToWatchlist) {
-        addToWatchlist.addEventListener("click", () => {
-          // To check if movie has been already added
-          const alreadyAdded = watchList.some(
-            (movie) => movie.imdbID === data.imdbID
-          );
+        addToWatchlist.forEach((button) => {
+          button.addEventListener("click", () => {
+            // To check if movie has been already added
+            const alreadyAdded = watchList.some(
+              (movie) => movie.imdbID === data.imdbID
+            );
 
-          if (!alreadyAdded) {
-            watchList.push(data);
-            localStorage.setItem("watchlist", JSON.stringify(watchList));
-            console.log("Movie has been added to watchlist!");
-          } else {
-            console.log("Don't bother, movie already in watchlist!");
-          }
+            if (!alreadyAdded) {
+              watchList.push(data);
+              localStorage.setItem("watchlist", JSON.stringify(watchList));
+              // Sweet2Alert
+              Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Movie added to your watchlist!",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              });
+            } else {
+              // Sweet2Alert
+              Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "info",
+                title: "Already in watchlist",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+              });
+            }
+          });
         });
       }
     })
@@ -112,5 +133,15 @@ removeBtns.forEach((button, index) => {
     watchList.splice(index, 1);
     localStorage.setItem("watchlist", JSON.stringify(watchList));
     location.reload();
+
+    // Swal.fire({
+    //   toast: true,
+    //   position: "top-end",
+    //   icon: "warning",
+    //   title: "Removed from watchlist",
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    //   timerProgressBar: true,
+    // });
   });
 });
