@@ -2,7 +2,9 @@ const apiKey = "4edfe651";
 const movieTitle = document.getElementById("movie-input");
 const form = document.getElementById("form");
 const movieContainer = document.getElementById("movie-container");
-const watchListContainer = document.getElementById("watchlist-container");
+const watchlistContainer = document.getElementById("watchlist-container");
+// Watchlist
+let watchList = JSON.parse(localStorage.getItem("watchlist")) || [];
 
 function renderMovie(e) {
   e.preventDefault();
@@ -42,8 +44,6 @@ function renderMovie(e) {
 
       if (addToWatchlist) {
         addToWatchlist.addEventListener("click", () => {
-          // Watchlist Array
-          let watchList = JSON.parse(localStorage.getItem("watchList")) || [];
           // To check if movie has been already added
           const alreadyAdded = watchList.some(
             (movie) => movie.imdbID === data.imdbID
@@ -62,8 +62,55 @@ function renderMovie(e) {
     .catch((error) => console.error(`The error: ${error}`));
 }
 
-form.addEventListener("submit", renderMovie);
+if (form) {
+  form.addEventListener("submit", renderMovie);
+}
 
-document.getElementById("add-button").addEventListener("click", () => {
-  console.log("added to watchlist");
+// Code for WatchList
+if (watchlistContainer) {
+  console.log(watchList);
+
+  if (watchList.length === 0) {
+    watchlistContainer.innerHTML = `
+    <p>Your watchlist is looking a little empty...</p>
+          <a href="index.html"
+            ><i class="fa-solid fa-plus"></i>Let’s add some movies!</a
+          >
+    `;
+  } else {
+    const watchContainer = watchList
+      .map(
+        (movie) => `
+        <div class="movie-box"> 
+        <img src="${movie.Poster}" alt="A poster of ${movie.Title}"/>
+        <div class="movie-content">
+        <div class="movie-heading">
+        <h1>${movie.Title}</h1>
+        <i class="fa-solid fa-star"></i>
+        <span>${movie.Ratings?.[0]?.Value || "No rating available"}</span>
+        </div >
+        <span class="movie-genre">
+        <p>${movie.Runtime}</p>
+        <p>${movie.Genre}</p>
+        <button class="remove-btn"><i class="fa-solid fa-minus"></i>Remove</button>
+        </span>
+        <p class="plot">${movie.Plot}</p>
+        </div>
+        </div>
+        `
+      )
+      .join("");
+
+    watchlistContainer.innerHTML = watchContainer;
+  }
+}
+
+const removeBtns = document.querySelectorAll(".remove-btn");
+
+removeBtns.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    watchList.splice(index, 1);
+    localStorage.setItem("watchlist", JSON.stringify(watchList));
+    location.reload();
+  });
 });
